@@ -10,6 +10,7 @@ return {
         mason_lspconfig.setup({
             ensure_installed = {
                 "lua_ls",
+                "elixirls",
             },
             -- auto-install configured servers (with lspconfig)
             automatic_installation = true

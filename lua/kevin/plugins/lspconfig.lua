@@ -18,7 +18,6 @@ return {
             -- set keybinds on attach for each language server
             opts.desc = "Show LSP references"
             keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show references
-
             opts.desc = "[G]o to [D]eclaration"
             keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
 
@@ -36,6 +35,19 @@ return {
         end
 
         local capabilities = cmp_nvim_lsp.default_capabilities()
+
+
+        --[[ 
+        -- By default, elixir-ls doesn't have a cmd set. This is because nvim-lspconfig does not make assumptions about your path. You must add the following to your init.vim or init.lua to set cmd to the absolute path ($HOME and ~ are not expanded) of your unzipped elixir-ls.
+        --https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#elixirls:~:text=By%20default%2C%20elixir%2Dls%20doesn%27t%20have%20a%20cmd%20set.%20This%20is%20because%20nvim%2Dlspconfig%20does%20not%20make%20assumptions%20about%20your%20path.%20You%20must%20add%20the%20following%20to%20your%20init.vim%20or%20init.lua%20to%20set%20cmd%20to%20the%20absolute%20path%20(%24HOME%20and%20~%20are%20not%20expanded)%20of%20your%20unzipped%20elixir%2Dls. ]]
+        lspconfig["elixirls"].setup({
+            -- cmd = { uv.os_homedir().."/mason/packages/elixir-ls/language_server.sh" };
+             cmd = {  "C:/Users/Kevco/AppData/Local/nvim-data/mason/packages/elixir-ls/language_server.bat" },
+             root_dir = lspconfig.util.root_pattern('mix.exs'),
+             capabilities,
+             on_attach = on_attach
+        })
+
 
         lspconfig["lua_ls"].setup({
             capabilities,

@@ -22,5 +22,6 @@ return {
 
 		-- set keymaps
 		vim.keymap.set("n", "<leader>tf", "<cmd>NvimTreeToggle<CR>", { desc = "[T]oggle [F]ile explorer" })
+		vim.keymap.set("n", "<leader>ttf", "<cmd>NvimTreeFindFile<CR>", { desc = "[T]ree - [T]his [F]ile" })
 	end
 }
